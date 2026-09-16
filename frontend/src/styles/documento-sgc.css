@@ -1,0 +1,150 @@
+/* Formato de documentos SGC: restaura espaciado que Tailwind Preflight deja en 0. */
+@layer components {
+.sgc-content {
+  color: #111;
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.sgc-content > *:first-child {
+  margin-top: 0;
+}
+
+.sgc-content h1,
+.sgc-content h2,
+.sgc-content h3,
+.sgc-content h4,
+.sgc-content h5,
+.sgc-content h6 {
+  display: block;
+  color: #111;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  text-transform: none;
+}
+
+.sgc-content h1 {
+  font-size: 16px;
+  margin: 1.4em 0 0.65em;
+}
+
+.sgc-content h2 {
+  font-size: 13px;
+  margin: 1.45em 0 0.55em;
+}
+
+.sgc-content h3,
+.sgc-content h4,
+.sgc-content h5,
+.sgc-content h6 {
+  font-size: 12px;
+  margin: 1.25em 0 0.45em;
+}
+
+.sgc-content p {
+  display: block;
+  margin: 0 0 0.9em;
+  text-align: justify;
+}
+
+.sgc-content p:has(> strong:only-child),
+.sgc-content p:has(> b:only-child) {
+  margin-top: 1.25em;
+  margin-bottom: 0.45em;
+  font-size: 13px;
+  text-align: left;
+}
+
+.sgc-content ul,
+.sgc-content ol {
+  display: block;
+  margin: 0.55em 0 1.1em;
+  padding-left: 1.6em;
+  text-align: left;
+}
+
+.sgc-content ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.sgc-content ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.sgc-content li {
+  display: list-item;
+  margin: 0.4em 0;
+  line-height: 1.65;
+  padding-left: 0.15em;
+}
+
+.sgc-content li p {
+  margin: 0 0 0.25em;
+  text-align: left;
+}
+
+.sgc-content ul ul,
+.sgc-content ol ol,
+.sgc-content ul ol,
+.sgc-content ol ul {
+  margin: 0.25em 0 0.45em;
+}
+
+.sgc-content br {
+  display: block;
+  content: "";
+  margin-bottom: 0.45em;
+}
+
+.sgc-content blockquote {
+  margin: 1em 0;
+  padding-left: 1rem;
+  border-left: 3px solid #d1d5db;
+}
+
+.sgc-content hr {
+  margin: 1.4em 0;
+  border: 0;
+  border-top: 1px solid #d1d5db;
+}
+
+.sgc-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.8em 0;
+}
+
+.sgc-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.9em 0 1.2em;
+  font-size: 11px;
+}
+
+.sgc-content th,
+.sgc-content td {
+  border: 1px solid #111;
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.sgc-content th {
+  background: #6b6b6b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sgc-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.9em 0;
+}
+}

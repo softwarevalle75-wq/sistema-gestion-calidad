@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220" role="img" aria-label="Universitaria de Colombia">
+  <path d="M78 18c-32 0-54 22-54 62v58c0 40 24 64 62 64 18 0 34-6 46-18 10-10 16-24 16-40V80h-38v62c0 14-8 24-22 24s-24-10-24-26V82c0-16 8-26 24-26h48V18H78z" fill="#111"/>
+  <text x="168" y="92" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700" fill="#111">niversitaria</text>
+  <text x="168" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" fill="#C8102E">de Colombia</text>
+  <path d="M28 168c38-10 78-6 118 8 18 6 12 18-8 16-42-4-84 2-122 16-10 4-16-6-8-16 12-14 12-18 20-24z" fill="#FCD116"/>
+  <path d="M22 182c42-8 86-2 126 12 16 6 10 16-8 14-40-4-86 4-124 16-10 4-16-6-8-16 10-12 10-18 14-26z" fill="#0033A0"/>
+  <path d="M18 196c44-6 90 2 128 14 14 5 8 14-8 12-42-4-88 4-126 14-10 3-16-6-8-14 8-10 10-18 14-26z" fill="#CE1126"/>
+</svg>

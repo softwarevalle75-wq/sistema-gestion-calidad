@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "codigo": "NC-2024-001",
+    "tipo": "No Conformidad",
+    "descripcion": "Falta de registros de calibración de equipos",
+    "estado": "Abierta",
+    "gravedad": "Mayor",
+    "fechaDeteccion": "2024-10-15",
+    "responsable": "Carlos Rodríguez"
+  },
+  {
+    "id": 2,
+    "codigo": "AC-2024-005",
+    "tipo": "Acción Correctiva",
+    "descripcion": "Implementar procedimiento de control de documentos",
+    "estado": "En Proceso",
+    "gravedad": "Media",
+    "fechaDeteccion": "2024-10-12",
+    "responsable": "María García"
+  },
+  {
+    "id": 3,
+    "codigo": "AUD-2024-003",
+    "tipo": "Auditoría Interna",
+    "descripcion": "Auditoría ISO 9001 - Proceso de Producción",
+    "estado": "Completada",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-10",
+    "responsable": "Juan Pérez"
+  },
+  {
+    "id": 4,
+    "codigo": "R-2024-008",
+    "tipo": "Riesgo",
+    "descripcion": "Rotación de personal clave en área de calidad",
+    "estado": "En Tratamiento",
+    "gravedad": "Alta",
+    "fechaDeteccion": "2024-10-08",
+    "responsable": "Ana Martínez"
+  },
+  {
+    "id": 5,
+    "codigo": "CAP-2024-012",
+    "tipo": "Capacitación",
+    "descripcion": "Formación en requisitos ISO 9001:2015",
+    "estado": "Programada",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-20",
+    "responsable": "Pedro López"
+  },
+  {
+    "id": 6,
+    "codigo": "NC-2024-002",
+    "tipo": "No Conformidad",
+    "descripcion": "Producto no conforme en lote PTD-4521",
+    "estado": "Cerrada",
+    "gravedad": "Menor",
+    "fechaDeteccion": "2024-10-05",
+    "responsable": "Laura Sánchez"
+  },
+  {
+    "id": 7,
+    "codigo": "IND-2024-001",
+    "tipo": "Indicador",
+    "descripcion": "Índice de satisfacción del cliente - Trimestre 3",
+    "estado": "Completado",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-09-30",
+    "responsable": "Roberto Díaz"
+  },
+  {
+    "id": 8,
+    "codigo": "OBJ-2024-004",
+    "tipo": "Objetivo de Calidad",
+    "descripcion": "Reducir devoluciones en 15% durante Q4",
+    "estado": "En Seguimiento",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-01",
+    "responsable": "Carmen Torres"
+  },
+  {
+    "id": 9,
+    "codigo": "DOC-2024-025",
+    "tipo": "Documento",
+    "descripcion": "Manual de Calidad Rev. 3.0",
+    "estado": "Aprobado",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-18",
+    "responsable": "Sistema Calidad"
+  },
+  {
+    "id": 10,
+    "codigo": "AC-2024-006",
+    "tipo": "Acción Correctiva",
+    "descripcion": "Mejora en tiempo de respuesta a quejas",
+    "estado": "Verificada",
+    "gravedad": "Media",
+    "fechaDeteccion": "2024-10-03",
+    "responsable": "Sofía Ramírez"
+  },
+  {
+    "id": 11,
+    "codigo": "HALL-2024-002",
+    "tipo": "Hallazgo Auditoría",
+    "descripcion": "Falta de evidencia en entrenamiento del personal",
+    "estado": "Abierto",
+    "gravedad": "Menor",
+    "fechaDeteccion": "2024-10-10",
+    "responsable": "Juan Pérez"
+  },
+  {
+    "id": 12,
+    "codigo": "CR-2024-004",
+    "tipo": "Control de Riesgo",
+    "descripcion": "Backup automático de sistema de gestión documental",
+    "estado": "Implementado",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-07",
+    "responsable": "TI Calidad"
+  },
+  {
+    "id": 13,
+    "codigo": "PROC-2024-001",
+    "tipo": "Proceso",
+    "descripcion": "Revisión del proceso de compras",
+    "estado": "En Revisión",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-10-14",
+    "responsable": "Departamento Compras"
+  },
+  {
+    "id": 14,
+    "codigo": "NC-2024-003",
+    "tipo": "No Conformidad",
+    "descripcion": "Desviación en temperatura de almacenamiento",
+    "estado": "En Tratamiento",
+    "gravedad": "Mayor",
+    "fechaDeteccion": "2024-10-16",
+    "responsable": "Almacén"
+  },
+  {
+    "id": 15,
+    "codigo": "AUD-2024-004",
+    "tipo": "Auditoría Externa",
+    "descripcion": "Auditoría de certificación ISO 9001",
+    "estado": "Programada",
+    "gravedad": "N/A",
+    "fechaDeteccion": "2024-11-15",
+    "responsable": "Comité de Calidad"
+  }
+]
