@@ -29,6 +29,7 @@ interface InitialData {
   aprobadoPor?: string;
   contenidoHtml?: string;
   rutaArchivo?: string;
+  descripcionCambios?: string;
 }
 
 interface DocumentFormWithTipTapProps {
@@ -50,6 +51,9 @@ export const DocumentFormWithTipTap = ({
   const [preview, setPreview] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [exporting, setExporting] = useState(false);
+  const [descripcionCambios, setDescripcionCambios] = useState(
+    initialData?.descripcionCambios || ""
+  );
   const [marca, setMarca] = useState<MarcaSGC>({
     logoUrl: null,
     titulo: "Universitaria de Colombia",
@@ -118,6 +122,9 @@ export const DocumentFormWithTipTap = ({
       if (initialData.rutaArchivo) {
         setDocumentMode('upload');
       }
+      if (initialData.descripcionCambios) {
+        setDescripcionCambios(initialData.descripcionCambios);
+      }
     }
   }, [initialData, user?.id]);
 
@@ -177,20 +184,25 @@ export const DocumentFormWithTipTap = ({
       }
     }
 
+    if (mode === "edit" && initialData?.estado === "aprobado" && !descripcionCambios.trim()) {
+      newErrors.descripcionCambios = "Debe registrar la justificación o descripción del cambio (Control de Cambios ISO 9001)";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   // Lógica de permisos
+  const isAdmin = usuarioTienePermiso(user, ["sistema.admin"]);
   const isCreator = user?.id === formData.subidoPor;
   const isReviewer = user?.id === formData.revisadoPor;
   const isApprover = user?.id === formData.aprobadoPor;
 
-  // En modo creación, todo es editable. En edición, depende del rol.
-  const canEditMetadata = mode === 'create' || isCreator;
-  const canEditContent = mode === 'create' || isCreator || isReviewer;
-  const canAssign = mode === 'create' || isCreator;
-  const canchangeStatus = mode === 'create' || isCreator; // Permitir al creador cambiar estado (ej. enviar a revisión)
+  // En modo creación, todo es editable. En edición, creador, revisor o admin pueden editar según corresponda.
+  const canEditMetadata = mode === 'create' || isCreator || isAdmin;
+  const canEditContent = mode === 'create' || isCreator || isReviewer || isAdmin;
+  const canAssign = mode === 'create' || isCreator || isAdmin;
+  const canchangeStatus = mode === 'create' || isCreator || isAdmin;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -215,13 +227,14 @@ export const DocumentFormWithTipTap = ({
       data.append("version_actual", formData.version);
       data.append("visibilidad", formData.visibilidad);
       data.append("estado", formData.estado);
+      data.append("descripcion_cambios", descripcionCambios);
 
       // En edición, no enviar subidoPor si no se ha cambiado (aunque esté deshabilitado)
       if (formData.subidoPor) data.append("creado_por", formData.subidoPor);
 
       // Add content based on mode
       if (documentMode === 'editor') {
-        data.append("contenidoHtml", content); // Verificar si backend espera esto o 'ruta_archivo'
+        data.append("contenidoHtml", content);
       } else if (documentMode === 'upload' && uploadedFile) {
         data.append("archivo", uploadedFile);
       }
@@ -419,6 +432,43 @@ export const DocumentFormWithTipTap = ({
               className="w-full px-3 py-2 border border-input rounded-md bg-background disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
+
+          {/* Control de Cambios (ISO 9001) */}
+          {mode === "edit" && (
+            <div className="col-span-3">
+              <label className="block text-sm font-medium mb-2">
+                Control de Cambios / Justificación del Ajuste {initialData?.estado === "aprobado" ? "*" : "(Opcional)"}
+              </label>
+              <input
+                type="text"
+                name="descripcionCambios"
+                value={descripcionCambios}
+                onChange={(e) => {
+                  setDescripcionCambios(e.target.value);
+                  if (errors.descripcionCambios) {
+                    setErrors((prev) => ({ ...prev, descripcionCambios: "" }));
+                  }
+                }}
+                disabled={!canEditContent}
+                className={`w-full px-3 py-2 border rounded-md bg-background ${
+                  errors.descripcionCambios ? "border-destructive" : "border-input"
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                placeholder={
+                  initialData?.estado === "aprobado"
+                    ? "Ej: Se actualiza formato y se añaden campos de verificación según auditoría interna"
+                    : "Describa los cambios realizados si desea registrarlos en el historial de versiones"
+                }
+              />
+              {errors.descripcionCambios && (
+                <p className="text-destructive text-sm mt-1">{errors.descripcionCambios}</p>
+              )}
+              <p className="text-xs text-muted-foreground mt-1">
+                {initialData?.estado === "aprobado"
+                  ? "⚠️ Al modificar un formato aprobado, se archivará la versión vigente y se generará una nueva revisión para su correspondiente revisión y aprobación (ISO 9001)."
+                  : "Registro de trazabilidad para el historial documental."}
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

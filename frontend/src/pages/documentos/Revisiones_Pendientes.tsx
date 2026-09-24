@@ -133,14 +133,14 @@ export default function RevisionesPendientes() {
 
         setActionLoading(documento.id);
         try {
-            // Al aprobar la revisión, pasa a pendiente de aprobación
-            await documentoService.update(documento.id, { estado: "pendiente_aprobacion" });
+            // Al aprobar la revisión, se solicita la aprobación formal
+            await documentoService.solicitarAprobacion(documento.id);
             toast.success(`Documento "${documento.nombre}" revisado. Enviado a aprobación.`);
             await fetchRevisionesPendientes();
             closeDialog();
         } catch (error) {
             console.error("Error:", error);
-            toast.error("Error al finalizar la revisión");
+            toast.error(error instanceof Error ? error.message : "Error al finalizar la revisión");
         } finally {
             setActionLoading(null);
         }

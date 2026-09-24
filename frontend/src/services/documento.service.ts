@@ -13,6 +13,7 @@ export interface DocumentoData {
   creado_por?: string;
   aprobado_por?: string;
   revisado_por?: string;
+  descripcion_cambios?: string;
 }
 
 export interface UsuarioNested {
@@ -47,6 +48,7 @@ export interface DocumentoResponse {
     id: string;
     version: string;
     descripcion_cambios?: string;
+    contenido?: string;
     ruta_archivo?: string;
     creado_en: string;
     creador?: UsuarioNested;
@@ -125,6 +127,26 @@ class DocumentoService {
     creado_por?: string;
   }): Promise<any> {
     const response = await apiClient.post('/versiones-documentos', data);
+    return response.data;
+  }
+
+  async solicitarRevision(id: string, revisorId: string): Promise<any> {
+    const response = await apiClient.post(`/documentos/${id}/solicitar-revision?revisor_id=${revisorId}`);
+    return response.data;
+  }
+
+  async solicitarAprobacion(id: string): Promise<any> {
+    const response = await apiClient.post(`/documentos/${id}/solicitar-aprobacion`);
+    return response.data;
+  }
+
+  async aprobar(id: string): Promise<any> {
+    const response = await apiClient.post(`/documentos/${id}/aprobar`);
+    return response.data;
+  }
+
+  async rechazar(id: string, motivo: string): Promise<any> {
+    const response = await apiClient.post(`/documentos/${id}/rechazar?motivo=${encodeURIComponent(motivo)}`);
     return response.data;
   }
 }

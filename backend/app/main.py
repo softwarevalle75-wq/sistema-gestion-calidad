@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from .config import settings
 from .api import (
-    routes, usuarios, procesos, documentos, 
+    routes, usuarios, procesos, documentos,
     calidad, auditorias, riesgos, capacitaciones, competencias, sistema, auth, migraciones, tickets, notificaciones,
     analytics, reportes, uploads, codigos
 )
@@ -118,6 +118,17 @@ async def startup_event():
         print(f"⚠️ No se pudo actualizar el esquema de calidad al arrancar: {exc}")
 
     try:
+        from .db.ensure_schema import asegurar_esquema_documentos
+
+        doc_cols = asegurar_esquema_documentos()
+        if doc_cols:
+            print(f"✅ Esquema de documentos actualizado | {','.join(doc_cols)}")
+        else:
+            print("✅ Esquema de documentos verificado")
+    except Exception as exc:
+        print(f"⚠️ No se pudo actualizar el esquema de documentos al arrancar: {exc}")
+
+    try:
         from .database import SessionLocal
         from .db.sync_rbac import sincronizar_rbac_sgc
 
@@ -140,7 +151,3 @@ async def startup_event():
 async def shutdown_event():
     """Evento que se ejecuta al cerrar la aplicación"""
     print("👋 Cerrando aplicación...")
-
-
-
-

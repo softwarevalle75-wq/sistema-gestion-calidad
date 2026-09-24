@@ -38,6 +38,7 @@ type Version = {
   id: string;
   version: string;
   descripcion_cambios?: string;
+  contenido?: string;
   creado_en: string;
   creado_por?: {
     nombre?: string;
@@ -618,7 +619,7 @@ export default function ControlVersiones() {
                                   <div className="flex-1 bg-[#F1F5F9] p-4 flex items-center justify-center rounded-b-2xl overflow-auto relative min-h-[420px]">
                                     {(() => {
                                       const archivo = selectedVersion?.ruta_archivo || selectedDoc?.ruta_archivo;
-                                      const html = selectedDoc?.descripcion;
+                                      const html = selectedVersion ? (selectedVersion.contenido || selectedDoc?.descripcion) : selectedDoc?.descripcion;
                                       if (archivo && !esContenidoHtml(archivo)) {
                                         return (
                                           <iframe

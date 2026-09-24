@@ -138,13 +138,13 @@ export default function AprobacionesPendientes() {
 
     setActionLoading(documento.id);
     try {
-      await documentoService.update(documento.id, { estado: "aprobado" });
+      await documentoService.aprobar(documento.id);
       toast.success(`Documento "${documento.nombre}" aprobado correctamente`);
       await fetchAprobacionesPendientes();
       closeDialog();
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Error al aprobar el documento");
+      toast.error(error instanceof Error ? error.message : "Error al aprobar el documento");
     } finally {
       setActionLoading(null);
     }
@@ -156,13 +156,13 @@ export default function AprobacionesPendientes() {
 
     setActionLoading(documento.id);
     try {
-      await documentoService.update(documento.id, { estado: "borrador" });
-      toast.success(`Documento "${documento.nombre}" rechazado. Devuelto a borrador.`);
+      await documentoService.rechazar(documento.id, "Rechazado en etapa de aprobación");
+      toast.success(`Documento "${documento.nombre}" rechazado.`);
       await fetchAprobacionesPendientes();
       closeDialog();
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Error al rechazar el documento");
+      toast.error(error instanceof Error ? error.message : "Error al rechazar el documento");
     } finally {
       setActionLoading(null);
     }

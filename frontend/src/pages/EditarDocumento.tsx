@@ -86,22 +86,25 @@ export default function EditarDocumento() {
       setError(null);
 
       const nuevoContenido = formData.get("contenidoHtml") as string;
+      const descripcionCambios = (formData.get("descripcion_cambios") as string) || "";
       const versionFormulario =
         (formData.get("version_actual") as string) ||
         (formData.get("version") as string) ||
         initialData?.version ||
         "1.0";
-      const versionActual = siguienteVersion(versionFormulario);
 
-      toast.info(`Nueva versión del documento: ${versionActual}`);
+      if (initialData?.estado === "aprobado") {
+        toast.info("Modificando documento vigente: se generará una nueva revisión para su aprobación (ISO 9001)");
+      }
 
       const documentData: any = {
         codigo: formData.get("codigoDocumento") as string,
         nombre: formData.get("nombreArchivo") as string,
         descripcion: nuevoContenido || `Documento ${formData.get("nombreArchivo")}`,
         tipo_documento: formData.get("tipo_documento") as string,
-        version_actual: versionActual,
+        version_actual: versionFormulario,
         estado: formData.get("estado") as string,
+        descripcion_cambios: descripcionCambios,
       };
 
       const creado_por = formData.get("creado_por") as string || formData.get("subidoPor") as string;

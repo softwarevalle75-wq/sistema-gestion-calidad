@@ -18,7 +18,7 @@ class UsuarioNested(BaseModel):
     segundoApellido: Optional[str] = Field(None, validation_alias="segundo_apellido")
     correoElectronico: Optional[str] = Field(None, validation_alias="correo_electronico")
     nombreUsuario: Optional[str] = Field(None, validation_alias="nombre_usuario")
-    
+
     model_config = ConfigDict(from_attributes=True, populate_by_name=True)
 
 
@@ -61,6 +61,7 @@ class DocumentoUpdate(BaseModel):
     fecha_vigencia: Optional[datetime] = None
     aprobado_por: Optional[UUID] = None
     revisado_por: Optional[UUID] = None
+    descripcion_cambios: Optional[str] = None
 
     @field_validator('aprobado_por', 'revisado_por', mode='before')
     @classmethod
@@ -75,6 +76,7 @@ class VersionDocumentoBase(BaseModel):
     documento_id: UUID
     version: str = Field(..., max_length=20)
     descripcion_cambios: Optional[str] = None
+    contenido: Optional[str] = None
     ruta_archivo: Optional[str] = None
     creado_por: Optional[UUID] = None
 
@@ -87,7 +89,7 @@ class VersionDocumentoResponse(VersionDocumentoBase):
     id: UUID
     creado_en: datetime
     creador: Optional[UsuarioNested] = None
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -99,7 +101,7 @@ class DocumentoResponse(DocumentoBase):
     revisor: Optional[UsuarioNested] = None
     aprobador: Optional[UsuarioNested] = None
     versiones: Optional[list[VersionDocumentoResponse]] = []
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -116,5 +118,5 @@ class DocumentoProcesoResponse(BaseModel):
     proceso_id: UUID
     tipo_relacion: str
     creado_en: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)

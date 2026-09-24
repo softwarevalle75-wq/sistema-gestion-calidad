@@ -256,3 +256,33 @@ def asegurar_esquema_calidad() -> list[str]:
 
     _calidad_listo = True
     return aplicadas
+
+
+_documentos_listo = False
+
+SQL_DOCUMENTOS = (
+    (
+        "version_documentos.contenido",
+        "ALTER TABLE version_documentos ADD COLUMN IF NOT EXISTS contenido TEXT",
+    ),
+)
+
+
+def asegurar_esquema_documentos() -> list[str]:
+    """Asegura columnas requeridas para versionamiento documental."""
+    global _documentos_listo
+    if _documentos_listo:
+        return []
+
+    aplicadas: list[str] = []
+    for nombre, sql in SQL_DOCUMENTOS:
+        try:
+            with engine.begin() as conexion:
+                conexion.execute(text(sql))
+            aplicadas.append(nombre)
+        except Exception as exc:
+            print(f"⚠️ No se pudo asegurar {nombre}: {exc}")
+            return aplicadas
+
+    _documentos_listo = True
+    return aplicadas
